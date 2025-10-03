@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>lr30_project11</name>
+  <version>0.0.0</version>
+  <description>Launch and config for use with Chance LR30 USV</description>
+
+  <maintainer email="roland@ccom.unh.edu">Roland Arsenault</maintainer>
+
+  <license>Apache License 2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>depthai_marine</depend>
+  <depend>rclcpp</depend>
+  <exec_depend>sbg_driver</exec_depend>
+
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
