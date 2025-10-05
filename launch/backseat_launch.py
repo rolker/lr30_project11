@@ -51,10 +51,19 @@ def generate_launch_description():
                 ),
                 launch_arguments={
                     'namespace': namespace,
-                    'enable_bridge': 'true',
                     'enable_helm': 'false',
                 }.items()
                 ),
+                IncludeLaunchDescription(
+                    PythonLaunchDescriptionSource(
+                        PathJoinSubstitution([
+                            FindPackageShare('udp_bridge'),
+                            'launch',
+                            'udp_bridge_launch.py'
+                        ])
+                    )
+                ),
+
                 # mru_transform Provides tf2 transforms from multiple gps and motion sensor sources.
                 Node(
                     package='mru_transform',

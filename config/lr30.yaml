@@ -13,7 +13,7 @@
       sources:
         sbg:
           topics:
-            orientation: "navigation/sbg/heading"
+            orientation: "navigation/sbg/orientation"
             position: "navigation/sbg/fix"
             velocity: "navigation/sbg/vel"
 
@@ -23,7 +23,7 @@
     sensors:
       sbg:
         topics:
-          orientation: "navigation/sbg/heading"
+          orientation: "navigation/sbg/orientation"
           position: "navigation/sbg/fix"
           velocity: "navigation/sbg/vel"
     sensor_names:
@@ -33,13 +33,14 @@
 /**/udp_bridge:
   ros__parameters:
     name: lr30
+    maximum_packet_size: 1400
     remotes:
       operator:
         connections:
           default:
             topics:
               position: {source: navigation/sbg/fix}
-              heading: {source: navigation/sbg/heading}
+              heading: {source: navigation/sbg/orientation}
               velocity: {source: navigation/sbg/vel}
 
    
