@@ -1,0 +1,45 @@
+/**/platform_sender:
+  ros__parameters:
+    width: 2.0
+    length: 9.144
+    color:
+      red: 1.0
+      green: 0.8
+      blue: 0.1
+
+    nav:
+      source_names:
+        - sbg
+      sources:
+        sbg:
+          topics:
+            orientation: "navigation/sbg/heading"
+            position: "navigation/sbg/fix"
+            velocity: "navigation/sbg/vel"
+
+
+/**/mru_transform:
+  ros__parameters:
+    sensors:
+      sbg:
+        topics:
+          orientation: "navigation/sbg/heading"
+          position: "navigation/sbg/fix"
+          velocity: "navigation/sbg/vel"
+    sensor_names:
+    - sbg
+
+
+/**/udp_bridge:
+  ros__parameters:
+    name: lr30
+    remotes:
+      operator:
+        connections:
+          default:
+            topics:
+              position: {source: navigation/sbg/fix}
+              heading: {source: navigation/sbg/heading}
+              velocity: {source: navigation/sbg/vel}
+
+   

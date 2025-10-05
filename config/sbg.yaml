@@ -26,7 +26,7 @@
     # Udp configuration
     ipConf:
       ipAddress: "0.0.0.0"              # Ip address of the device.
-      out_port: 5303                    # Output port of the device.
+      out_port: 5307                    # Output port of the device.
       in_port: 0                     # Inport of the device.
     
     # Sensor Parameters
