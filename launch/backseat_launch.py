@@ -5,10 +5,13 @@ from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch.substitutions import PathJoinSubstitution
+from launch.substitutions import PythonExpression
 from launch.substitutions import TextSubstitution
 from launch_ros.actions import Node
 from launch_ros.actions import PushROSNamespace
+from launch_ros.actions import SetParameter
 from launch_ros.actions import SetParametersFromFile
+from launch_ros.actions import SetRemap
 from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
@@ -75,8 +78,6 @@ def generate_launch_description():
                         ])
                     )
                 ),
-
-                # mru_transform Provides tf2 transforms from multiple gps and motion sensor sources.
                 Node(
                     package='mru_transform',
                     executable='mru_transform_node',
@@ -99,7 +100,70 @@ def generate_launch_description():
                                     "sonar_launch.py"
                                 ])
                             ])
-                        )
+                        ),
+                        GroupAction(
+                            actions=[
+                                PushROSNamespace("sonar"),
+                                GroupAction(
+                                    actions=[
+                                    SetRemap(
+                                        src='position',
+                                        dst=PythonExpression( expression = [ '"/', 
+                                            namespace,
+                                            '/navigation/sbg/fix"'
+                                        ])
+                                    ),
+                                    SetRemap(
+                                        src='orientation',
+                                        dst=PythonExpression( expression = [ '"/',
+                                            namespace,
+                                            '/navigation/sbg/orientation"'
+                                        ])
+                                    ),
+                                    SetRemap(
+                                        src='velocity',
+                                        dst=PythonExpression( expression = [ '"/',
+                                            namespace,
+                                            '/navigation/sbg/vel"'
+                                        ])
+                                    ),
+                                    IncludeLaunchDescription(
+                                        PythonLaunchDescriptionSource(
+                                            PathJoinSubstitution([
+                                                FindPackageShare('cube_bathymetry'),
+                                                'launch',
+                                                'detections_to_pointcloud_launch.py'
+                                            ])
+                                        )
+                                    ),
+                                    ]
+                                ),
+                                GroupAction(
+                                    actions=[
+                                    SetParameter(
+                                        name='map_frame',
+                                        value=PythonExpression(
+                                            expression = ['"', tf_prefix, '/map"']
+                                        )
+                                    ),
+                                    SetParameter(
+                                        name='cell_size',
+                                        value=0.5
+                                    ),
+                                    IncludeLaunchDescription(
+                                        PythonLaunchDescriptionSource(
+                                            PathJoinSubstitution([
+                                                FindPackageShare('cube_bathymetry'),
+                                                'launch',
+                                                'cube_bathymetry_launch.py'
+                                            ])
+                                        )
+                                    ),
+                                    ]
+                                )
+                            ]
+                        ),
+
                     ]
                 ),
                 GroupAction(
