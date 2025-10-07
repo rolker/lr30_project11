@@ -1,0 +1,14 @@
+/**/udp_bridge:
+  ros__parameters:
+    name: operator
+    maximum_packet_size: 1400
+    remotes_list:
+      - lr30
+    remotes:
+      lr30:
+        connections_list:
+          - default
+        connections:
+          default:
+            host: roboatdz
+            port: 4200
