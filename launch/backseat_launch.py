@@ -31,6 +31,18 @@ def generate_launch_description():
             'lr30.yaml'
           ])
         ),
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                PathJoinSubstitution([
+                    FindPackageShare('lr30_project11'),
+                    'launch',
+                    'publish_state_launch.py'
+                ])
+            ),
+            launch_arguments={
+                'namespace': namespace
+            }.items()
+        ),
         GroupAction(
             actions=[
                 PushROSNamespace(namespace),
@@ -75,6 +87,20 @@ def generate_launch_description():
                         {'map_frame': [tf_prefix, '/map']},
                         {'odom_frame': [tf_prefix, '/odom']}
                     ],
+                ),
+                GroupAction(
+                    actions=[
+                        PushROSNamespace("sensors"),
+                        IncludeLaunchDescription(
+                            PythonLaunchDescriptionSource([
+                                PathJoinSubstitution([
+                                    FindPackageShare("lr30_project11"),
+                                    "launch",
+                                    "sonar_launch.py"
+                                ])
+                            ])
+                        )
+                    ]
                 ),
                 GroupAction(
                     actions=[

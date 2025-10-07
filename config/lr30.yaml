@@ -34,13 +34,29 @@
   ros__parameters:
     name: lr30
     maximum_packet_size: 1400
+    remotes_list:
+    - operator
     remotes:
       operator:
+        connections_list:
+        - default
         connections:
           default:
+            host: deadpooldz
+            port: 4200
+            maximum_bytes_per_second: 1500000
+            topics_list:
+            - position
+            - heading
+            - velocity
+            - platforms
+            - robot_description
+            - tf
             topics:
               position: {source: navigation/sbg/fix}
               heading: {source: navigation/sbg/orientation}
               velocity: {source: navigation/sbg/vel}
+              platforms: {source: /project11/platforms}
+              robot_description: {source: robot_description}
+              tf: {source: /tf}
 
-   

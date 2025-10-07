@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<robot name="lr30">
+
+<material name="yellow">
+  <color rgba="1 1 0 1"/>
+</material>
+
+<material name="red">
+  <color rgba="1 0 0 1"/>
+</material>
+
+<link name="lr30/base_link">
+  <visual name="hull">
+    <geometry>
+      <box size="9.144 2.0 2.0"/>
+    </geometry>
+    <origin xyz="0 0 1" rpy="0 0 0"/>
+    <material name="yellow"/>
+  </visual>
+  <collision>
+    <geometry>
+      <box size="9.144 2.0 2.0"/>
+    </geometry>
+  </collision>
+  <visual name="bow">
+    <geometry>
+      <box size="1.44 1.44 2.0"/>
+    </geometry>
+    <origin xyz="4.55 0 1" rpy="0 0 0.7854"/>
+    <material name="yellow"/>
+  </visual>
+</link>
+
+<link name="lr30/sonar">
+  <visual name="sonar">
+    <geometry>
+      <box size="0.25 0.25 0.25"/>
+    </geometry>
+    <origin xyz="0.0 0 0" rpy="0 0 0"/>
+    <material name="red"/>
+  </visual>
+</link>
+
+<joint name="base_to_sonar" type="fixed">
+  <parent link="lr30/base_link"/>
+  <child link="lr30/sonar"/>
+  <origin xyz="-0.273 0.003 -0.075" rpy="3.14159 0 3.14159"/>
+</joint>
+
+</robot>
+
