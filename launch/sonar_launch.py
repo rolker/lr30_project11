@@ -10,9 +10,9 @@ def generate_launch_description():
             executable="r2sonic_node",
             name="sonar",
             parameters=[{
-                'ports/bathy': 4020,
-                'tx_frame_id': 'lr30/sonar',
-                'rx_frame_id': 'lr30/sonar',
+                'network.gui_baseport': 4020,
+                'sonar.tx_frame_id': 'lr30/sonar',
+                'sonar.rx_frame_id': 'lr30/sonar',
             }],
             #emulate_tty=True
             output="screen"

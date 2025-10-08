@@ -46,17 +46,29 @@
             port: 4200
             maximum_bytes_per_second: 1500000
             topics_list:
+            - camera_left
+            - camera_left_info
+            - camera_left_raw
+            - camera_right
+            - camera_right_info
+            - camera_right_raw
             - position
             - heading
             - velocity
             - platforms
-            - robot_description
+            - soundings
             - tf
             topics:
+              camera_left: {source: sensors/cameras/left/image_raw/compressed, period: 1.0}
+              camera_left_info: {source: sensors/cameras/left/camera_info}
+              camera_left_raw: {source: sensors/cameras/left/image_raw, period: -1.0}
+              camera_right: {source: sensors/cameras/right/image_raw/compressed, period: 1.0}
+              camera_right_info: {source: sensors/cameras/right/camera_info}
+              camera_right_raw: {source: sensors/cameras/right/image_raw, period: -1.0}
               position: {source: navigation/sbg/fix}
               heading: {source: navigation/sbg/orientation}
               velocity: {source: navigation/sbg/vel}
               platforms: {source: /project11/platforms}
-              robot_description: {source: robot_description}
+              soundings: {source: sensors/sonar/soundings}
               tf: {source: /tf}
 
