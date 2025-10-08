@@ -53,7 +53,7 @@
 <joint name="base_to_sonar" type="fixed">
   <parent link="lr30/base_link"/>
   <child link="lr30/sonar"/>
-  <origin xyz="-0.273 0.003 -0.075" rpy="3.14159 0 3.14159"/>
+  <origin xyz="-0.273 0.003 -0.075" rpy="3.14159 0 0"/>
 </joint>
 
 <link name="lr30/camera_right">

@@ -12,6 +12,8 @@ def generate_launch_description():
             parameters=[{
                 'left_camera_id':  "194430106121872D00",
                 'right_camera_id': "19443010D117872D00",
+                'left_camera_frame_id': 'lr30/camera_left_optical',
+                'right_camera_frame_id': 'lr30/camera_right_optical',
             }],
             #emulate_tty=True
             output="screen"
