@@ -56,5 +56,56 @@
   <origin xyz="-0.273 0.003 -0.075" rpy="3.14159 0 3.14159"/>
 </joint>
 
+<link name="lr30/camera_right">
+  <visual name="camera_right">
+    <geometry>
+      <box size="0.1 0.1 0.1"/>
+    </geometry>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="red"/>
+  </visual>
+</link>
+
+<joint name="base_to_camera_right" type="fixed">
+  <parent link="lr30/base_link"/>
+  <child link="lr30/camera_right"/>
+  <origin xyz="-2.332 -0.5 2.696" rpy="0 0 0"/>
+</joint>
+
+<link name="lr30/camera_right_optical">
+</link>
+
+<joint name="camera_right_to_camera_right_optical" type="fixed">
+  <parent link="lr30/camera_right"/>
+  <child link="lr30/camera_right_optical"/>
+  <origin xyz="0 0 0" rpy="-1.5708 0 -1.5708"/>
+</joint>
+
+<link name="lr30/camera_left">
+  <visual name="camera_left">
+    <geometry>
+      <box size="0.1 0.1 0.1"/>
+    </geometry>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <material name="red"/>
+  </visual>
+</link>
+
+<joint name="base_to_camera_left" type="fixed">
+  <parent link="lr30/base_link"/>
+  <child link="lr30/camera_left"/>
+  <origin xyz="-2.332 0.5 2.696" rpy="0 0 0"/>
+</joint>
+
+<link name="lr30/camera_left_optical">
+</link>
+
+<joint name="camera_left_to_camera_left_optical" type="fixed">
+  <parent link="lr30/camera_left"/>
+  <child link="lr30/camera_left_optical"/>
+  <origin xyz="0 0 0" rpy="-1.5708 0 -1.5708"/>
+</joint>
+
 </robot>
+
 
