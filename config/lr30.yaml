@@ -17,6 +17,10 @@
             position: "navigation/sbg/fix"
             velocity: "navigation/sbg/vel"
 
+/**/manda_coverage:
+  ros__parameters:
+    soundings_topic: "sensors/sonar/soundings"
+    display_topic: "manda_coverage_display"
 
 /**/mru_transform:
   ros__parameters:
@@ -29,11 +33,10 @@
     sensor_names:
     - sbg
 
-
 /**/udp_bridge:
   ros__parameters:
     name: lr30
-    maximum_packet_size: 1400
+    maximum_packet_size: 1200
     remotes_list:
     - operator
     remotes:
@@ -52,12 +55,22 @@
             - camera_right
             - camera_right_info
             - camera_right_raw
+            - camera_ewasr_left
+            - camera_ewasr_left_info
+            - camera_ewasr_left_raw
+            - camera_ewasr_right
+            - camera_ewasr_right_info
+            - camera_ewasr_right_raw
+            - camera_jolo_left
+            - camera_jolo_right
             - position
             - heading
             - velocity
             - platforms
             - soundings
             - tf
+            - manda_coverage_display
+            - command_response
             topics:
               camera_left: {source: sensors/cameras/left/image_raw/compressed, period: 1.0}
               camera_left_info: {source: sensors/cameras/left/camera_info}
@@ -71,4 +84,14 @@
               platforms: {source: /project11/platforms}
               soundings: {source: sensors/sonar/soundings}
               tf: {source: /tf}
+              manda_coverage_display: {source: manda_coverage_display}
+              command_response: {source: /project11/response}
+              camera_ewasr_left: {source: sensors/cameras/left/ewasr/compressed}
+              camera_ewasr_left_info: {source: sensors/cameras/left/ewasr/camera_info}
+              camera_ewasr_left_raw: {source: sensors/cameras/left/ewasr, period: -1.0}
+              camera_ewasr_right: {source: sensors/cameras/right/ewasr/compressed}
+              camera_ewasr_right_info: {source: sensors/cameras/right/ewasr/camera_info}
+              camera_ewasr_right_raw: {source: sensors/cameras/right/ewasr, period: -1.0}
+              camera_jolo_left: {source: sensors/cameras/left/jolo}
+              camera_jolo_right: {source: sensors/cameras/right/jolo}
 

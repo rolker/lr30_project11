@@ -57,17 +57,17 @@ def generate_launch_description():
                 ])
                 ),
                 IncludeLaunchDescription(
-                PythonLaunchDescriptionSource(
-                    PathJoinSubstitution([
-                    FindPackageShare('project11'),
-                    'launch',
-                    'robot_core_launch.py'
-                    ])
-                ),
-                launch_arguments={
-                    'namespace': namespace,
-                    'enable_helm': 'false',
-                }.items()
+                    PythonLaunchDescriptionSource(
+                        PathJoinSubstitution([
+                            FindPackageShare('project11'),
+                            'launch',
+                            'robot_core_launch.py'
+                        ])
+                    ),
+                    launch_arguments={
+                        'namespace': namespace,
+                        'enable_helm': 'false',
+                    }.items()
                 ),
                 IncludeLaunchDescription(
                     PythonLaunchDescriptionSource(
@@ -88,6 +88,21 @@ def generate_launch_description():
                         {'map_frame': [tf_prefix, '/map']},
                         {'odom_frame': [tf_prefix, '/odom']}
                     ],
+                ),
+                Node(
+                    package='mission_manager',
+                    executable='multibeam_coverage_adapter',
+                    name='multibeam_coverage_adapter',
+                    emulate_tty=True,
+                ),
+                IncludeLaunchDescription(
+                    PythonLaunchDescriptionSource(
+                        PathJoinSubstitution([
+                            FindPackageShare('manda_coverage'),
+                            'launch',
+                            'manda_coverage_launch.py'
+                        ])
+                    )
                 ),
                 GroupAction(
                     actions=[
@@ -148,7 +163,7 @@ def generate_launch_description():
                                     ),
                                     SetParameter(
                                         name='cell_size',
-                                        value=0.5
+                                        value=1.0
                                     ),
                                     IncludeLaunchDescription(
                                         PythonLaunchDescriptionSource(
