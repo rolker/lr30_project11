@@ -121,36 +121,33 @@ def generate_launch_description():
                                 PushROSNamespace("sonar"),
                                 GroupAction(
                                     actions=[
-                                    SetRemap(
-                                        src='position',
-                                        dst=PythonExpression( expression = [ '"/', 
-                                            namespace,
-                                            '/navigation/sbg/fix"'
-                                        ])
-                                    ),
-                                    SetRemap(
-                                        src='orientation',
-                                        dst=PythonExpression( expression = [ '"/',
-                                            namespace,
-                                            '/navigation/sbg/orientation"'
-                                        ])
-                                    ),
-                                    SetRemap(
-                                        src='velocity',
-                                        dst=PythonExpression( expression = [ '"/',
-                                            namespace,
-                                            '/navigation/sbg/vel"'
-                                        ])
-                                    ),
-                                    IncludeLaunchDescription(
-                                        PythonLaunchDescriptionSource(
-                                            PathJoinSubstitution([
-                                                FindPackageShare('cube_bathymetry'),
-                                                'launch',
-                                                'detections_to_pointcloud_launch.py'
+                                        SetParameter(
+                                            name='sensors.sbg.topics.orientation',
+                                            value=PythonExpression( expression = [ '"/', 
+                                                namespace, '/navigation/sbg/orientation"'
                                             ])
-                                        )
-                                    ),
+                                        ),
+                                        SetParameter(
+                                            name='sensors.sbg.topics.position',
+                                            value=PythonExpression( expression = [ '"/',
+                                                namespace, '/navigation/sbg/fix"'
+                                            ])
+                                        ),
+                                        SetParameter(
+                                            name='sensors.sbg.topics.velocity',
+                                            value=PythonExpression( expression = [ '"/',
+                                                namespace, '/navigation/sbg/vel"'
+                                            ])
+                                        ),
+                                        IncludeLaunchDescription(
+                                            PythonLaunchDescriptionSource(
+                                                PathJoinSubstitution([
+                                                    FindPackageShare('cube_bathymetry'),
+                                                    'launch',
+                                                    'detections_to_pointcloud_launch.py'
+                                                ])
+                                            )
+                                        ),
                                     ]
                                 ),
                                 GroupAction(
