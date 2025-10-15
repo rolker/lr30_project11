@@ -158,10 +158,6 @@ def generate_launch_description():
                                             expression = ['"', tf_prefix, '/map"']
                                         )
                                     ),
-                                    SetParameter(
-                                        name='cell_size',
-                                        value=1.0
-                                    ),
                                     IncludeLaunchDescription(
                                         PythonLaunchDescriptionSource(
                                             PathJoinSubstitution([

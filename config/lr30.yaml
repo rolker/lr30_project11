@@ -17,8 +17,15 @@
             position: "navigation/sbg/fix"
             velocity: "navigation/sbg/vel"
 
+/**/cube_bathymetry:
+  ros__parameters:
+    cell_size: 1.5
+    grid_cell_count: 25
+
 /**/detections_to_pointcloud:
   ros__parameters:
+    minimum_range: 5.0
+    maximum_range: 100.0
     sensor_names:
       - sbg
     sensors:
@@ -63,15 +70,15 @@
             - camera_left
             - camera_left_info
             - camera_left_raw
-            # - camera_right
-            # - camera_right_info
-            # - camera_right_raw
+            - camera_right
+            - camera_right_info
+            - camera_right_raw
             - camera_ewasr_left
             - camera_ewasr_left_info
             - camera_ewasr_left_raw
-            # - camera_ewasr_right
-            # - camera_ewasr_right_info
-            # - camera_ewasr_right_raw
+            - camera_ewasr_right
+            - camera_ewasr_right_info
+            - camera_ewasr_right_raw
             - camera_jolo_left
             - camera_jolo_right
             - position
@@ -82,6 +89,7 @@
             - tf
             - manda_coverage_display
             - command_response
+            - mission_status
             topics:
               camera_left: {source: sensors/cameras/left/image_raw/compressed, period: 1.0}
               camera_left_info: {source: sensors/cameras/left/camera_info}
@@ -96,7 +104,7 @@
               soundings: {source: sensors/sonar/soundings}
               tf: {source: /tf}
               manda_coverage_display: {source: manda_coverage_display}
-              command_response: {source: /project11/response}
+              command_response: {source: project11/response}
               camera_ewasr_left: {source: sensors/cameras/left/ewasr/compressed}
               camera_ewasr_left_info: {source: sensors/cameras/left/ewasr/camera_info}
               camera_ewasr_left_raw: {source: sensors/cameras/left/ewasr, period: -1.0}
@@ -105,4 +113,4 @@
               camera_ewasr_right_raw: {source: sensors/cameras/right/ewasr, period: -1.0}
               camera_jolo_left: {source: sensors/cameras/left/jolo}
               camera_jolo_right: {source: sensors/cameras/right/jolo}
-
+              mission_status: {source: project11/status/mission_manager}
