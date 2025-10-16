@@ -76,5 +76,57 @@ def generate_launch_description():
                     'foxglove_bridge_launch.xml'
                 ])
             )
-        )
+        ),
+        GroupAction(actions=[
+            PushROSNamespace(robot_namespace),
+            Node(
+                package = 'detection_visualizer',
+                executable = 'detection_visualizer',
+                name = 'left_detection_visualizer',
+                remappings = [
+                    ('~/detections', 'sensors/cameras/left/jolo'),
+                    ('~/images', 'sensors/cameras/left/image_raw/decompressed'),
+                    ('~/dbg_images', 'sensors/cameras/left/jolo/image_raw'),
+
+                ]
+            ),
+            Node(
+                package="image_transport",
+                executable="republish",
+                name="left_decompressor",
+                remappings=[
+                    ('in/compressed', 'sensors/cameras/left/image_raw/compressed'),
+                    ('out', 'sensors/cameras/left/image_raw/decompressed'),
+                ],
+                parameters=[{
+                    'in_transport': "compressed",
+                    'out_transport': "raw"
+                }]
+            ),
+            Node(
+                package = 'detection_visualizer',
+                executable = 'detection_visualizer',
+                name = 'right_detection_visualizer',
+                remappings = [
+                    ('~/detections', 'sensors/cameras/right/jolo'),
+                    ('~/images', 'sensors/cameras/right/image_raw/decompressed'),
+                    ('~/dbg_images', 'sensors/cameras/right/jolo/image_raw'),
+
+                ]
+            ),
+            Node(
+                package="image_transport",
+                executable="republish",
+                name="right_decompressor",
+                remappings=[
+                    ('in/compressed', 'sensors/cameras/right/image_raw/compressed'),
+                    ('out', 'sensors/cameras/right/image_raw/decompressed'),
+                ],
+                parameters=[{
+                    'in_transport': "compressed",
+                    'out_transport': "raw"
+                }]
+            ),
+        ])
+
     ])

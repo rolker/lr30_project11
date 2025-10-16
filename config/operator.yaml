@@ -12,3 +12,8 @@
           default:
             host: roboatdz
             port: 4200
+            topics_list:
+            - command
+            topics:
+              command: {source: /lr30/project11/command}
+
