@@ -56,6 +56,22 @@
   <origin xyz="-0.273 0.003 -0.075" rpy="3.14159 0 0"/>
 </joint>
 
+<link name="lr30/sidescan">
+  <visual name="sidescan">
+    <geometry>
+      <box size="01.5 0.25 0.25"/>
+    </geometry>
+    <origin xyz="0.0 0 0" rpy="0 0 0"/>
+    <material name="red"/>
+  </visual>
+</link>
+
+<joint name="base_to_sidescan" type="fixed">
+  <parent link="lr30/base_link_level"/>
+  <child link="lr30/sidescan"/>
+  <origin xyz="-50.0 0 -20.0" rpy="3.14159 0 0"/>
+</joint>
+
 <link name="lr30/camera_right">
   <visual name="camera_right">
     <geometry>
