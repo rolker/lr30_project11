@@ -14,7 +14,7 @@
   <exec_depend>cube_bathymetry</exec_depend>
   <exec_depend>marine_ais_tools</exec_depend>
   <exec_depend>nmea_navsat_driver</exec_depend>
-  <exec_depend>project11</exec_depend>
+  <exec_depend>marine_autonomy</exec_depend>
   <depend>joint_state_publisher</depend>
   <depend>robot_state_publisher</depend>
 
